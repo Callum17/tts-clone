@@ -756,12 +756,12 @@ class Xtts(BaseTTS):
 
         model_path = checkpoint_path or os.path.join(checkpoint_dir, "model.pth")
         vocab_path = vocab_path or os.path.join(checkpoint_dir, "vocab.json")
-        speaker_file_path = speaker_file_path or os.path.join(checkpoint_dir, "speakers_xtts.pth")
+        #### speaker_file_path = speaker_file_path or os.path.join(checkpoint_dir, "speakers_xtts.pth")
 
         self.language_manager = LanguageManager(config)
         self.speaker_manager = None
-        if os.path.exists(speaker_file_path):
-            self.speaker_manager = SpeakerManager(speaker_file_path)
+        #### if os.path.exists(speaker_file_path):
+        ####    self.speaker_manager = SpeakerManager(speaker_file_path)
 
         if os.path.exists(vocab_path):
             self.tokenizer = VoiceBpeTokenizer(vocab_file=vocab_path)
@@ -769,6 +769,7 @@ class Xtts(BaseTTS):
         self.init_models()
 
         checkpoint = self.get_compatible_checkpoint_state_dict(model_path)
+
 
         # deal with v1 and v1.1. V1 has the init_gpt_for_inference keys, v1.1 do not
         try:
